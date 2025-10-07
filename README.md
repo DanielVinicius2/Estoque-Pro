@@ -131,3 +131,107 @@ Sinta-se à vontade para sugerir melhorias ou abrir PRs!
 
 Este projeto é distribuído sob a licença **MIT**.  
 Sinta-se livre para usar e adaptar conforme necessário.
+
+---
+
+# 📦 Modelo Lógico do Banco de Dados — Estoque Pro
+
+O banco de dados foi projetado para o **gerenciamento de estoque** com controle de produtos, categorias, fornecedores e movimentações.  
+Desenvolvido utilizando **Supabase (PostgreSQL)** e integrado ao **Lovable App**.
+
+---
+
+## 🧱 Estrutura do Banco de Dados
+
+### **Tabela: produto**
+| Campo | Tipo | Descrição |
+|--------|------|------------|
+| id | int8 (PK) | Identificador único do produto |
+| marca | varchar | Marca ou fabricante |
+| tipo | varchar | Tipo ou modelo do produto |
+| preco_unitario | float8 | Valor de venda unitário |
+| custo | float8 | Custo do produto |
+| obs | varchar | Observações |
+| id_categoria | int8 (FK) | Relaciona à tabela categorias |
+| id_fornecedor | int8 (FK) | Relaciona à tabela fornecedor |
+| codigo | text | Código interno ou de barras |
+| quantidade_estoque | int8 | Quantidade em estoque |
+| data_criacao | timestamptz | Data de criação |
+| data_atualizacao | timestamptz | Data da última atualização |
+
+---
+
+### **Tabela: categorias**
+| Campo | Tipo | Descrição |
+|--------|------|------------|
+| id | int8 (PK) | Identificador da categoria |
+| nome | text | Nome da categoria |
+
+---
+
+### **Tabela: fornecedor**
+| Campo | Tipo | Descrição |
+|--------|------|------------|
+| id | int8 (PK) | Identificador do fornecedor |
+| nome | varchar | Nome do fornecedor |
+| contato | varchar | Nome do contato |
+| email | text | E-mail de contato |
+| telefone | varchar | Telefone |
+| cnpj | varchar | CNPJ da empresa |
+| endereco | text | Endereço físico |
+
+---
+
+### **Tabela: entradas_estoque**
+| Campo | Tipo | Descrição |
+|--------|------|------------|
+| id | int8 (PK) | Identificador da entrada |
+| id_produto | int8 (FK) | Produto relacionado |
+| id_fornecedor | int8 (FK) | Fornecedor da entrada |
+| quantidade | int8 | Quantidade recebida |
+| preco_custo | float8 | Custo unitário |
+| data_entrada | date | Data da entrada |
+
+---
+
+### **Tabela: saidas_estoque**
+| Campo | Tipo | Descrição |
+|--------|------|------------|
+| id | int8 (PK) | Identificador da saída |
+| id_produto | int8 (FK) | Produto retirado |
+| quantidade | int8 | Quantidade retirada |
+| data_saida | date | Data da saída |
+| obs | varchar | Observações (motivo da saída) |
+
+---
+
+## 🔗 Diagrama de Relacionamentos (Resumo)
+
+```
+categorias (1) ───< (N) produto (1) >─── (N) fornecedor
+│
+└──────────────┬──────────────┘
+               ▼
+     entradas_estoque (N)
+     saidas_estoque (N)
+```
+
+---
+
+## ⚖️ Regras de Integridade
+
+- Todas as chaves estrangeiras são validadas (integridade referencial).  
+- Entradas incrementam e saídas decrementam a quantidade em estoque.  
+- Margem de lucro = ((preco_unitario - custo) / custo) * 100.  
+- Campos de data permitem auditoria e rastreabilidade.  
+
+---
+
+### 💡 Tecnologias Utilizadas
+- **Supabase (PostgreSQL)** — Banco de dados e autenticação  
+- **Lovable** — Interface visual e integração com Supabase  
+- **SQL Functions** — Para cálculos de estoque e margem de lucro  
+
+---
+
+> Documentação do modelo lógico do projeto **[Estoque Pro](https://daniels-stock-manager.lovable.app/)**.
