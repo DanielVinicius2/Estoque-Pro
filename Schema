@@ -1,0 +1,52 @@
+CREATE TABLE public.categorias (
+  id bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  nome text NOT NULL,
+  CONSTRAINT categorias_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.entradas_estoque (
+  id bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  id_produto bigint NOT NULL,
+  id_fornecedor bigint,
+  quantidade bigint,
+  preco_custo double precision,
+  data_entrada date,
+  CONSTRAINT entradas_estoque_pkey PRIMARY KEY (id),
+  CONSTRAINT entradas_estoque_id_produto_fkey FOREIGN KEY (id_produto) REFERENCES public.produto(id),
+  CONSTRAINT entradas_estoque_id_fornecedor_fkey FOREIGN KEY (id_fornecedor) REFERENCES public.fornecedor(id)
+);
+CREATE TABLE public.fornecedor (
+  id bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  nome character varying NOT NULL,
+  contato character varying,
+  email text,
+  telefone character varying,
+  cnpj character varying,
+  endereco text,
+  CONSTRAINT fornecedor_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.produto (
+  id bigint GENERATED ALWAYS AS IDENTITY NOT NULL UNIQUE,
+  marca character varying NOT NULL,
+  tipo character varying,
+  preco_unitario double precision,
+  custo double precision,
+  obs character varying,
+  id_categoria bigint,
+  id_fornecedor bigint,
+  codigo text,
+  quantidade_estoque bigint,
+  data_criacao timestamp with time zone,
+  data_atualizacao timestamp with time zone,
+  CONSTRAINT produto_pkey PRIMARY KEY (id),
+  CONSTRAINT produto_id_categoria_fkey FOREIGN KEY (id_categoria) REFERENCES public.categorias(id),
+  CONSTRAINT produto_id_fornecedor_fkey FOREIGN KEY (id_fornecedor) REFERENCES public.fornecedor(id)
+);
+CREATE TABLE public.saidas_estoque (
+  id bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  id_produto bigint NOT NULL,
+  quantidade bigint,
+  data_saida date,
+  obs character varying,
+  CONSTRAINT saidas_estoque_pkey PRIMARY KEY (id),
+  CONSTRAINT saidas_estoque_id_produto_fkey FOREIGN KEY (id_produto) REFERENCES public.produto(id)
+);
