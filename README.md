@@ -235,3 +235,27 @@ categorias (1) ───< (N) produto (1) >─── (N) fornecedor
 ---
 
 > Documentação do modelo lógico do projeto **[Estoque Pro](https://daniels-stock-manager.lovable.app/)**.
+
+---
+# Link Video explicando o Sistema; https://www.loom.com/share/af36043cec5e46c69e0b52780fb536f2?sid=33064b6f-05c2-4073-b4d7-741e62974cd7
+# 📷 Prints das telas da Aplicação
+
+## Tela Inicial 
+
+### (Modo Escuro)
+<img width="1920" height="730" alt="image" src="https://github.com/user-attachments/assets/a405f09e-6a6c-424c-ab53-6c4522569d90" />
+
+### (Modo Claro)
+<img width="1920" height="700" alt="image" src="https://github.com/user-attachments/assets/9ebd4972-8ab3-4039-a19b-2235610a92f0" />
+
+## Tela Produtos
+
+### Visão geral
+<img width="1908" height="916" alt="image" src="https://github.com/user-attachments/assets/5103c223-420a-46cd-9976-831736fb91c7" />
+
+### Formulario de produto
+<img width="1918" height="928" alt="image" src="https://github.com/user-attachments/assets/c5668430-cf2b-41fa-8404-c17142713b59" />
+
+
+
+
